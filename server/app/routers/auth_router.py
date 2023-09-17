@@ -34,6 +34,6 @@ async def logout(response: Response):
 def secret(user: dict = Depends(authentication_user)):
     if not user:
         raise HTTPException(status_code=401, detail="Authentication failed!")
-    return {"message": "secret data", "user": user}
+    return {"message": "secret router", "user": user}
 
 
