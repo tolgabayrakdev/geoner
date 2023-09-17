@@ -11,8 +11,8 @@ auth_router = APIRouter()
 async def login(user: UserLogin, response: Response):
     data = AuthService.login(user.email, user.password)
     if data:
-        response.set_cookie(key="access_token", value=data["access_token"], httponly=True)
-        response.set_cookie(key="access_token", value=data["access_token"], httponly=True)
+        response.set_cookie(key="access_token", value=data["access_token"], httponly=True, secure=True, samesite='none')
+        response.set_cookie(key="refresh_token", value=data["refresh_token"], httponly=True, secure=True, samesite='none')
         return {"access_token": data["access_token"], "refresh_token": data["refresh_token"]}
 
 

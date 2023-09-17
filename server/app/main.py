@@ -12,7 +12,7 @@ app = FastAPI()
 dotenv_path = join(dirname(__file__), '../.env.development')
 load_dotenv(dotenv_path)
 
-origins = ["http://localhost:3000", "https://localhost:3000"]
+origins = ["http://localhost:5173", "https://localhost:5173"]
 
 app.add_middleware(
     CORSMiddleware,
