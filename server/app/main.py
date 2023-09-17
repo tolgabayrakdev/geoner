@@ -1,9 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.auth_router import auth_router
+from dotenv import load_dotenv
+import os
+from os.path import join, dirname
 
 
 app = FastAPI()
+
+
+dotenv_path = join(dirname(__file__), '../.env.development')
+load_dotenv(dotenv_path)
 
 origins = ["http://localhost:3000", "https://localhost:3000"]
 
@@ -18,7 +25,7 @@ app.add_middleware(
 
 @app.get("/")
 def hello():
-    return {"Hello": "From Fast Api"}
+    return {"Hello": os.getenv("name")}
 
 
 app.include_router(auth_router, prefix="/api/v1/auth")

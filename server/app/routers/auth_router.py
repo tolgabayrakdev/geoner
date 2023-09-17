@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from fastapi import Response
 from schemas.user import UserLogin, UserRegister
 from services.auth_service import AuthService
@@ -10,7 +10,6 @@ auth_router = APIRouter()
 @auth_router.post("/login")
 async def login(user: UserLogin, response: Response):
     data = AuthService.login(user.email, user.password)
-    print(data)
     if data:
         response.set_cookie(key="access_token", value=data["access_token"], httponly=True)
         response.set_cookie(key="access_token", value=data["access_token"], httponly=True)

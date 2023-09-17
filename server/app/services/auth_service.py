@@ -43,7 +43,6 @@ class AuthService:
             connection.commit()
         except Exception as e:
             connection.rollback()
-            raise HTTPException(status_code=400, detail= str(e))
-    
+            raise HTTPException(status_code=400, detail=str(e))
         finally:
             curr.close()
