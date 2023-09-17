@@ -20,7 +20,7 @@ class Helper:
     @staticmethod
     def generate_access_token(payload):
         return jwt.encode(
-            {"payload": payload, "exp": int(time.time() + 1000)},
+            {"payload": payload, "exp": int(time.time() + 10)},
             "secret",
             algorithm="HS256",
         )
