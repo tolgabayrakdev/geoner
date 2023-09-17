@@ -15,10 +15,15 @@ class AuthService:
                 (email, hash_password),
             )
             data = curr.fetchall()
+            print(data)
             connection.commit()
             if data:
-                access_token = Helper.generate_access_token({"email": data[0][0]})
-                refresh_token = Helper.generate_access_token({"email": data[0][0]})
+                access_token = Helper.generate_access_token(
+                    {"id": data[0][0], "email": data[0][1]}
+                )
+                refresh_token = Helper.generate_access_token(
+                    {"id": data[0][0], "email": data[0][1]}
+                )
                 return {"access_token": access_token, "refresh_token": refresh_token}
             else:
                 raise HTTPException(status_code=404, detail="User not found!")
