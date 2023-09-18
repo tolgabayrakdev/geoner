@@ -1,5 +1,6 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react"
 import { useState } from "react"
+import { Link } from "react-router-dom";
 
 
 type Props = {}
@@ -46,11 +47,11 @@ export default function Login({ }: Props) {
           {
             loading ? <section>
               <CardHeader>
-                <Heading size='md'> Login here</Heading>
+                <Heading size='md' className="text-center"> Log in here</Heading>
               </CardHeader>
               <CardBody>
-                <form onSubmit={loginSubmitHandle} className="">
-                  <Input onChange={(e) => setEmail(e.target.value)} className="mb-3" placeholder='Basic usage' />
+                <form onSubmit={loginSubmitHandle}>
+                  <Input onChange={(e) => setEmail(e.target.value)} className="mb-3" placeholder='Enter email' />
                   <InputGroup size='md'>
                     <Input
                       onChange={(e) => setPassword(e.target.value)}
@@ -64,17 +65,22 @@ export default function Login({ }: Props) {
                       </Button>
                     </InputRightElement>
                   </InputGroup>
-                  <Button type="submit" className="mt-4" colorScheme='blue'>Log In</Button>
+                  <Button type="submit" className="mt-5 w-full" colorScheme='blue'>Log In</Button>
 
                 </form>
               </CardBody>
               <CardFooter>
-                Forget password ?
+                <div className="">
+                  <Link className=" hover:underline text-blue-600 hover:text-blue-500 duration-300" to="/auth/reset-password">
+                    Forget password ?
+                  </Link>
+                  <Link className="ml-5 hover:underline text-blue-600 hover:text-blue-500 duration-300" to="/auth/register">
+                    Create account
+                  </Link>
+                </div>
               </CardFooter>
-            </section> : <p className="text-xl m-3">Loading...</p>
-
+            </section> : <p className="text-xl m-4">Loading...</p>
           }
-
         </Card>
       </div>
     </div>
