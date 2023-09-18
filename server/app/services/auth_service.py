@@ -15,7 +15,6 @@ class AuthService:
                 (email, hash_password),
             )
             data = curr.fetchall()
-            print(data)
             connection.commit()
             if data:
                 access_token = Helper.generate_access_token(
