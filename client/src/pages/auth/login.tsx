@@ -1,6 +1,6 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react"
+import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react"
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 type Props = {}
@@ -9,8 +9,10 @@ export default function Login({ }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [show, setShow] = useState(false);
+
+  const navigate = useNavigate();
+  const toast = useToast();
   const handleClick = () => setShow(!show);
 
 
@@ -28,9 +30,27 @@ export default function Login({ }: Props) {
       })
       if (res.status === 200) {
         console.log("GİRİŞ BAŞARILI");
+        toast({
+          title: 'Login successful!',
+          description: "Redirecting you",
+          status: 'success',
+          duration: 1000,
+          position: 'top-right',
+          isClosable: true,
+        })
+        navigate("/home")
+        
       } else {
         setTimeout(() => {
           setLoading(true)
+          toast({
+            title: 'Login failed!',
+            description: "Please, check your information",
+            status: 'warning',
+            duration: 1000,
+            position: 'top-right',
+            isClosable: true,
+          })
         }, 1500)
       }
     } catch (error) {
