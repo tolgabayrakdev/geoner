@@ -29,7 +29,6 @@ export default function Login({ }: Props) {
         body: JSON.stringify({ "email": email, "password": password })
       })
       if (res.status === 200) {
-        console.log("GİRİŞ BAŞARILI");
         toast({
           title: 'Login successful!',
           description: "Redirecting you",

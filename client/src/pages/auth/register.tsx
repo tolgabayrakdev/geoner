@@ -1,6 +1,6 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react"
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -9,8 +9,9 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [show, setShow] = useState(false);
+  const toast = useToast();
+  const navigate = useNavigate();
   const handleClick = () => setShow(!show);
 
 
@@ -26,10 +27,29 @@ export default function Register() {
         },
         body: JSON.stringify({ "username": username, "email": email, "password": password })
       })
-      if (res.status === 200) {
-        console.log("GİRİŞ BAŞARILI");
+      if (res.status === 201) {
+   
+        setTimeout(() => {
+          navigate("/auth/login")
+          toast({
+            title: 'Account created successful!',
+            description: "You can log in.",
+            status: 'success',
+            duration: 1500,
+            position: 'top-right',
+            isClosable: true,
+          })
+        },1500)
       } else {
         setTimeout(() => {
+          toast({
+            title: 'Account can not created!',
+            description: "Please check your information",
+            status: 'warning',
+            duration: 1500,
+            position: 'top-right',
+            isClosable: true,
+          })
           setLoading(true)
         }, 1500)
       }
