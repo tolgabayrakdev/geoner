@@ -1,7 +1,5 @@
-type Props = {}
+type Props = {};
 
 export default function Profile({}: Props) {
-  return (
-    <div>profile</div>
-  )
+  return <div>profile</div>;
 }

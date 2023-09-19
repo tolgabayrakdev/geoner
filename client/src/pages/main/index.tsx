@@ -1,8 +1,5 @@
-
-type Props = {}
+type Props = {};
 
 export default function MainPage({}: Props) {
-  return (
-    <div>Main</div>
-  )
+  return <div>Main</div>;
 }
