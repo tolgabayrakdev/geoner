@@ -2,6 +2,7 @@ from fastapi.exceptions import HTTPException
 from database import connection
 from utils.helper import Helper
 import psycopg2
+import uuid
 
 
 class AuthService:
@@ -48,5 +49,30 @@ class AuthService:
         except Exception as e:
             connection.rollback()
             raise HTTPException(status_code=400, detail=str(e))
+        finally:
+            curr.close()
+
+    @classmethod
+    def generate_reset_token(self, email: str):
+        curr = connection.cursor()
+        try:
+            curr.execute(
+                "SELECT * FROM users WHERE email = %s",
+                (email,)
+            )
+            data = curr.fetchone()
+            user_id = data[0]
+            curr.execute(
+                """
+                INSERT INTO user_reset_password(
+                
+                )
+                """
+            )
+            connection.commit()
+            
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=404, detail="Email address not found!")
         finally:
             curr.close()

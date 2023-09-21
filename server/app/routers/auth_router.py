@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi import Response, Depends, HTTPException
-from schemas.user import UserLogin, UserRegister
+from schemas.user import UserLogin, UserRegister, UserResetToken
 from services.auth_service import AuthService
 from depends.authentication_user import authentication_user
 
@@ -31,9 +31,13 @@ async def logout(response: Response):
 
 
 @auth_router.get("/secret")
-def secret(user: dict = Depends(authentication_user)):
+async def secret(user: dict = Depends(authentication_user)):
     if not user:
         raise HTTPException(status_code=401, detail="Authentication failed!")
     return {"message": "secret router", "user": user}
 
 
+@auth_router.post("/forget-password", status_code=201)
+async def generate_passwrord_reset_token(user: UserResetToken):
+    AuthService.generate_reset_token(email=user.email)
+    return {"message": "Password reset link sended your mail address"}
