@@ -46,7 +46,7 @@ export default function Login({}: Props) {
           position: 'top-right',
           isClosable: true,
         });
-        navigate('/home');
+        navigate('/main');
       } else {
         setTimeout(() => {
           setLoading(true);

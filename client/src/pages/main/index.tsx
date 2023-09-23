@@ -1,5 +1,7 @@
-type Props = {};
-
-export default function MainPage({}: Props) {
-  return <div>Main</div>;
+export default function MainPage() {
+  return(
+    <section>
+      Main page
+    </section>
+  )
 }
