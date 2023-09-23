@@ -2,7 +2,8 @@ from fastapi.exceptions import HTTPException
 from database import connection
 from utils.helper import Helper
 import psycopg2
-import uuid
+import smtplib
+from email.message import EmailMessage
 
 
 class AuthService:
@@ -11,6 +12,20 @@ class AuthService:
         curr = connection.cursor()
         hash_password = Helper.generate_hash_password(password=password)
         try:
+            sender = "from@example.com"
+            receiver = "to@example.com"
+            message = f"""\
+            Subject: Hi Mailtrap
+            To: {receiver}
+            From: {sender}
+
+            This is a test e-mail message."""
+
+
+            with smtplib.SMTP("sandbox.smtp.mailtrap.io", 2525) as server:
+                server.login("d225eaf7a363a3", "79b349db43a223")
+                server.sendmail(sender, receiver, message)
+                print("OK")
             curr.execute(
                 "SELECT * FROM users WHERE email = %s and password = %s",
                 (email, hash_password),
@@ -40,10 +55,10 @@ class AuthService:
             hash_password = Helper.generate_hash_password(data.password)
             curr.execute(
                 """
-                INSERT INTO users(username, email, password, created_at, updated_at)
-                VALUES(%s, %s, %s, now(), now())
+                INSERT INTO users(username, email, password, role_id, created_at, updated_at)
+                VALUES(%s, %s, %s, %s, now(), now())
                 """,
-                (data.username, data.email, hash_password),
+                (data.username, data.email, hash_password, 1),
             )
             connection.commit()
         except Exception as e:
