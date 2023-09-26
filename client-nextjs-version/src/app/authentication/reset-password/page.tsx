@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import { Grid, Box, Card, Stack, Typography } from "@mui/material";
+import { Grid, Box, Card, Stack, Typography, Button } from "@mui/material";
 // components
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
-import AuthResetPassword from "../auth/AuthResetPassword";
+import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
 
-const Login3 = () => {
+const ResetPassword = () => {
   return (
     <PageContainer title="Reset Password" description="this is Login page">
       <Box
@@ -47,45 +47,62 @@ const Login3 = () => {
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Logo />
               </Box>
-              <AuthResetPassword
-                subtext={
+
+              <Stack
+                direction="row"
+                spacing={1}
+                justifyContent="center"
+                mt={3}
+              >
+                <h3>Reset Password</h3>
+              </Stack>
+              <Stack>
+                <Box>
                   <Typography
                     variant="subtitle1"
-                    textAlign="center"
-                    color="textSecondary"
-                    mb={1}
+                    fontWeight={600}
+                    component="label"
+                    htmlFor="username"
+                    mb="5px"
                   >
-                    Your Social Campaigns
+                    Email
                   </Typography>
-                }
-                subtitle={
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    justifyContent="center"
-                    mt={3}
+                  <CustomTextField variant="outlined" fullWidth />
+                </Box>
+
+                <Stack
+                  justifyContent="space-between"
+                  direction="row"
+                  alignItems="center"
+                  my={2}
+                >
+
+                  <Typography
+                    component={Link}
+                    href="/authentication/login"
+                    fontWeight="500"
+                    sx={{
+                      textDecoration: "none",
+                      color: "primary.main",
+                    }}
                   >
-                    <Typography
-                      color="textSecondary"
-                      variant="h6"
-                      fontWeight="500"
-                    >
-                      New to Modernize?
-                    </Typography>
-                    <Typography
-                      component={Link}
-                      href="/authentication/register"
-                      fontWeight="500"
-                      sx={{
-                        textDecoration: "none",
-                        color: "primary.main",
-                      }}
-                    >
-                      Create an account
-                    </Typography>
-                  </Stack>
-                }
-              />
+                    Back to login
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Box>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  component={Link}
+                  href="/"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Box>
             </Card>
           </Grid>
         </Grid>
@@ -93,4 +110,4 @@ const Login3 = () => {
     </PageContainer>
   );
 };
-export default Login3;
+export default ResetPassword;

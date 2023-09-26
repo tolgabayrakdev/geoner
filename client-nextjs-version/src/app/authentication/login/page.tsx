@@ -52,12 +52,14 @@ const Login = () => {
               elevation={9}
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
             >
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <h2 className="">Logo here</h2>
+                 <Box display="flex" alignItems="center" justifyContent="center">
+                <Logo />
               </Box>
 
 
-
+              <Box display="flex" alignItems="center" justifyContent="center">
+               <h2>Login here</h2>
+              </Box>
 
               <Stack>
                 <Box>

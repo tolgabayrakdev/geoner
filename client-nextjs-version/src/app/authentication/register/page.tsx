@@ -49,8 +49,9 @@ const Register = () => {
               </Box>
 
 
-
-
+              <Box display="flex" alignItems="center" justifyContent="center">
+               <h2>Register here</h2>
+              </Box>
               <Box>
                 <Stack mb={3}>
                   <Typography variant="subtitle1"
@@ -92,7 +93,7 @@ const Register = () => {
                     color: "primary.main",
                   }}
                 >
-                  Sign In
+                  Sign Up
                 </Typography>
               </Stack>
 
