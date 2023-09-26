@@ -18,7 +18,7 @@ interface loginType {
   subtext?: JSX.Element | JSX.Element[];
 }
 
-const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
+const AuthResetPassword = ({ title, subtitle, subtext }: loginType) => (
   <>
     {title ? (
       <Typography fontWeight="700" variant="h2" mb={1}>
@@ -37,34 +37,18 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
           htmlFor="username"
           mb="5px"
         >
-          Username
+          Email
         </Typography>
         <CustomTextField variant="outlined" fullWidth />
       </Box>
-      <Box mt="25px">
-        <Typography
-          variant="subtitle1"
-          fontWeight={600}
-          component="label"
-          htmlFor="password"
-          mb="5px"
-        >
-          Password
-        </Typography>
-        <CustomTextField type="password" variant="outlined" fullWidth />
-      </Box>
+ 
       <Stack
         justifyContent="space-between"
         direction="row"
         alignItems="center"
         my={2}
       >
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
-            label="Remeber this Device"
-          />
-        </FormGroup>
+     
         <Typography
           component={Link}
           href="/"
@@ -95,4 +79,4 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
   </>
 );
 
-export default AuthLogin;
+export default AuthResetPassword;

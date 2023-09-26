@@ -1,12 +1,20 @@
 "use client";
 import Link from "next/link";
-import { Grid, Box, Card, Stack, Typography } from "@mui/material";
+import { Grid, Box, Card, Stack, Typography, FormGroup, FormControlLabel, Checkbox, Button, } from "@mui/material";
 // components
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
-import AuthLogin from "../auth/AuthLogin";
+import { useState } from "react";
+import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
 
-const Login2 = () => {
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLoginRequest = async () => {
+
+  }
+
   return (
     <PageContainer title="Login" description="this is Login page">
       <Box
@@ -45,47 +53,95 @@ const Login2 = () => {
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
             >
               <Box display="flex" alignItems="center" justifyContent="center">
-                <Logo />
+                <h2 className="">Logo here</h2>
               </Box>
-              <AuthLogin
-                subtext={
+
+
+
+
+              <Stack>
+                <Box>
                   <Typography
                     variant="subtitle1"
-                    textAlign="center"
-                    color="textSecondary"
-                    mb={1}
+                    fontWeight={600}
+                    component="label"
+                    htmlFor="username"
+                    mb="5px"
                   >
-                    Your Social Campaigns
+                    Email
                   </Typography>
-                }
-                subtitle={
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    justifyContent="center"
-                    mt={3}
+                  <CustomTextField variant="outlined" fullWidth />
+                </Box>
+                <Box mt="25px">
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight={600}
+                    component="label"
+                    htmlFor="password"
+                    mb="5px"
                   >
-                    <Typography
-                      color="textSecondary"
-                      variant="h6"
-                      fontWeight="500"
-                    >
-                      New to Modernize?
-                    </Typography>
-                    <Typography
-                      component={Link}
-                      href="/authentication/register"
-                      fontWeight="500"
-                      sx={{
-                        textDecoration: "none",
-                        color: "primary.main",
-                      }}
-                    >
-                      Create an account
-                    </Typography>
-                  </Stack>
-                }
-              />
+                    Password
+                  </Typography>
+                  <CustomTextField type="password" variant="outlined" fullWidth />
+                </Box>
+                <Stack
+                  justifyContent="space-between"
+                  direction="row"
+                  alignItems="center"
+                  my={2}
+                >
+
+                  <Typography
+                    component={Link}
+                    href="/authentication/reset-password"
+                    fontWeight="500"
+                    sx={{
+                      textDecoration: "none",
+                      color: "primary.main",
+                    }}
+                  >
+                    Forgot Password ?
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Box>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  component={Link}
+                  href="/"
+                  type="submit"
+                >
+                  Sign In
+                </Button>
+              </Box>
+              <Stack
+                direction="row"
+                spacing={1}
+                justifyContent="center"
+                mt={3}
+              >
+                <Typography
+                  color="textSecondary"
+                  variant="h6"
+                  fontWeight="500"
+                >
+                  New to Modernize?
+                </Typography>
+                <Typography
+                  component={Link}
+                  href="/authentication/register"
+                  fontWeight="500"
+                  sx={{
+                    textDecoration: "none",
+                    color: "primary.main",
+                  }}
+                >
+                  Create an account
+                </Typography>
+              </Stack>
             </Card>
           </Grid>
         </Grid>
@@ -93,4 +149,4 @@ const Login2 = () => {
     </PageContainer>
   );
 };
-export default Login2;
+export default Login;
