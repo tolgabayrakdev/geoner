@@ -80,7 +80,7 @@ class AuthService:
             curr.execute(
                 """
                 INSERT INTO user_reset_password(
-                
+                user_id, token, expire_time
                 )
                 """
             )
