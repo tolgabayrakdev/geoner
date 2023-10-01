@@ -5,12 +5,38 @@ import { Grid, Box, Card, Stack, Typography, FormGroup, FormControlLabel, Checkb
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
 import { useState } from "react";
+import { LoadingButton } from "@mui/lab";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLoginRequest = async () => {
+  const handleLoginRequest = async (e: any) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const result = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ email: email, password: password })
+      })
+      if (result.status === 200 && result.ok) {
+        setLoading(false);
+      } else {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500)
+      }
+    } catch (err: any) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500)
+    }
+
 
   }
 
@@ -54,50 +80,52 @@ const Login = () => {
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Logo />
               </Box>
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <h2>Login here</h2>
-              </Box>
-
-              <Stack>
-                <Box>
-                  <TextField label="Email" fullWidth />
+              <form onSubmit={handleLoginRequest}>
+                <Box display="flex" alignItems="center" justifyContent="center">
+                  <h2>Login here</h2>
                 </Box>
-                <Box mt="15px">
-                  <TextField type="password" label="Password" fullWidth />
-                </Box>
-                <Stack
-                  justifyContent="space-between"
-                  direction="row"
-                  alignItems="center"
-                  my={2}
-                >
 
-                  <Typography
-                    component={Link}
-                    href="/authentication/reset-password"
-                    fontWeight="500"
-                    sx={{
-                      textDecoration: "none",
-                      color: "primary.main",
-                    }}
+                <Stack>
+                  <Box>
+                    <TextField label="Email" fullWidth />
+                  </Box>
+                  <Box mt="15px">
+                    <TextField type="password" label="Password" fullWidth />
+                  </Box>
+                  <Stack
+                    justifyContent="space-between"
+                    direction="row"
+                    alignItems="center"
+                    my={2}
                   >
-                    Forgot Password ?
-                  </Typography>
+
+                    <Typography
+                      component={Link}
+                      href="/authentication/reset-password"
+                      fontWeight="500"
+                      sx={{
+                        textDecoration: "none",
+                        color: "primary.main",
+                      }}
+                    >
+                      Forgot Password ?
+                    </Typography>
+                  </Stack>
                 </Stack>
-              </Stack>
-              <Box>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  component={Link}
-                  href="/"
-                  type="submit"
-                >
-                  Sign In
-                </Button>
-              </Box>
+                <Box>
+                  <LoadingButton
+                    loading={loading}
+                    color="primary"
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                    type="submit"
+                  >
+                    Sign In
+                  </LoadingButton>
+                </Box>
+              </form>
+
               <Stack
                 direction="row"
                 spacing={1}
