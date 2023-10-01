@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Grid, Box, Card, Stack, Typography, FormGroup, FormControlLabel, Checkbox, Button, } from "@mui/material";
+import { Grid, Box, Card, Stack, Typography, FormGroup, FormControlLabel, Checkbox, Button, TextField, } from "@mui/material";
 // components
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
 import { useState } from "react";
-import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -52,39 +51,19 @@ const Login = () => {
               elevation={9}
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
             >
-                 <Box display="flex" alignItems="center" justifyContent="center">
+              <Box display="flex" alignItems="center" justifyContent="center">
                 <Logo />
               </Box>
-
-
               <Box display="flex" alignItems="center" justifyContent="center">
-               <h2>Login here</h2>
+                <h2>Login here</h2>
               </Box>
 
               <Stack>
                 <Box>
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight={600}
-                    component="label"
-                    htmlFor="username"
-                    mb="5px"
-                  >
-                    Email
-                  </Typography>
-                  <CustomTextField variant="outlined" fullWidth />
+                  <TextField label="Email" fullWidth />
                 </Box>
-                <Box mt="25px">
-                  <Typography
-                    variant="subtitle1"
-                    fontWeight={600}
-                    component="label"
-                    htmlFor="password"
-                    mb="5px"
-                  >
-                    Password
-                  </Typography>
-                  <CustomTextField type="password" variant="outlined" fullWidth />
+                <Box mt="15px">
+                  <TextField type="password" label="Password" fullWidth />
                 </Box>
                 <Stack
                   justifyContent="space-between"

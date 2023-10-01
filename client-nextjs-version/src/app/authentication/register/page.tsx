@@ -1,13 +1,20 @@
 "use client";
-import { Grid, Box, Card, Typography, Stack, Button } from "@mui/material";
+import { Grid, Box, Card, Typography, Stack, Button, TextField } from "@mui/material";
 import Link from "next/link";
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
-import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
+import { useState } from "react";
 
 const Register = () => {
-  return (
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleRegisterRequest = async () => {
+
+  }
+
+  return (
     <PageContainer title="Register" description="this is Register page">
       <Box
         sx={{
@@ -48,23 +55,19 @@ const Register = () => {
                 <Logo />
               </Box>
 
-
               <Box display="flex" alignItems="center" justifyContent="center">
-               <h2>Register here</h2>
+                <h2>Register here</h2>
               </Box>
               <Box>
                 <Stack mb={3}>
-                  <Typography variant="subtitle1"
-                    fontWeight={600} component="label" htmlFor='name' mb="5px">Name</Typography>
-                  <CustomTextField id="name" variant="outlined" fullWidth />
+                  <TextField label="Username" fullWidth />
+                  <Box mt="15px">
+                    <TextField className="" label="Email" fullWidth />
+                  </Box>
+                  <Box mt="15px">
+                    <TextField type="password" label="Password" fullWidth />
+                  </Box>
 
-                  <Typography variant="subtitle1"
-                    fontWeight={600} component="label" htmlFor='email' mb="5px" mt="25px">Email Address</Typography>
-                  <CustomTextField id="email" variant="outlined" fullWidth />
-
-                  <Typography variant="subtitle1"
-                    fontWeight={600} component="label" htmlFor='password' mb="5px" mt="25px">Password</Typography>
-                  <CustomTextField id="password" variant="outlined" fullWidth />
                 </Stack>
                 <Button color="primary" variant="contained" size="large" fullWidth component={Link} href="/authentication/login">
                   Sign Up
