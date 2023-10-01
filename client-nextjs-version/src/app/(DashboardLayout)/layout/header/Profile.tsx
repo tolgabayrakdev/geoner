@@ -22,6 +22,10 @@ const Profile = () => {
     setAnchorEl2(null);
   };
 
+  const handleLogoutRequest = async () => {
+    
+  }
+
   return (
     <Box>
       <IconButton
@@ -83,10 +87,8 @@ const Profile = () => {
         </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button
-            href="/authentication/login"
             variant="outlined"
             color="primary"
-            component={Link}
             fullWidth
           >
             Logout
