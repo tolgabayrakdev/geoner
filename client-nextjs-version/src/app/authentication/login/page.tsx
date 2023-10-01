@@ -36,8 +36,6 @@ const Login = () => {
         setLoading(false);
       }, 1500)
     }
-
-
   }
 
   return (
@@ -87,10 +85,10 @@ const Login = () => {
 
                 <Stack>
                   <Box>
-                    <TextField label="Email" fullWidth />
+                    <TextField onChange={(e)=> setEmail(e.target.value)} label="Email" fullWidth />
                   </Box>
                   <Box mt="15px">
-                    <TextField type="password" label="Password" fullWidth />
+                    <TextField onChange={(e)=> setPassword(e.target.value)} type="password" label="Password" fullWidth />
                   </Box>
                   <Stack
                     justifyContent="space-between"
@@ -98,7 +96,6 @@ const Login = () => {
                     alignItems="center"
                     my={2}
                   >
-
                     <Typography
                       component={Link}
                       href="/authentication/reset-password"
