@@ -91,3 +91,7 @@ class AuthService:
             raise HTTPException(status_code=404, detail="Email address not found!")
         finally:
             curr.close()
+
+    @classmethod
+    def token_check_and_change_password(self, token: str):
+        pass
