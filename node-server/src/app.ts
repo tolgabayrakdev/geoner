@@ -1,13 +1,23 @@
-import express from "express";
+import express, { Express} from "express";
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
+import cors from "cors";
 import 'dotenv/config';
+import './db';
 
-const app = express();
+
+// --------------
+const app: Express = express();
 const port: number = 3000;
 
-app.listen(port, () => {
-    console.log("Backend server running on port:5000");
-})
+app.use(express.json());
+app.use(cors({ origin: true, credentials: true}));
+app.use(morgan("common"));
+app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.send("Hello from nodejs with ts server" + ' ' + process.env.name)
+// Routers
+
+
+app.listen(port, () => {
+    console.log("[Server]: Node server running on port:5000");
 })

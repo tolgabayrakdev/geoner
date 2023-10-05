@@ -5,4 +5,9 @@ const pool = new Pool({
     connectionString  
 });
 
+pool.connect(function(err){
+    if (err) throw err;
+    console.log("[Database]: PostgreSQL is connected.");
+})
+
 export default pool;
