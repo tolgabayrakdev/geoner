@@ -1,13 +1,14 @@
-import { Pool } from "pg";
-const connectionString: string = "postgresql://root:root@localhost:5432/postgres";
+import { Pool } from 'pg';
+const connectionString: string =
+  'postgresql://root:root@localhost:5432/postgres';
 
 const pool = new Pool({
-    connectionString  
+  connectionString,
 });
 
-pool.connect(function(err){
-    if (err) throw err;
-    console.log("[Database]: PostgreSQL is connected.");
-})
+pool.connect(function (err) {
+  if (err) throw err;
+  console.log('[Database]: PostgreSQL is connected.');
+});
 
 export default pool;
