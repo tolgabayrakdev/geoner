@@ -6,7 +6,7 @@ export class Helper {
    * generateAccessToken
    */
   public generateAccessToken(payload: object): string {
-    return Jwt.sign(payload, 'SECRET_KEY', {
+    return Jwt.sign(payload, process.env.JWT_SECRET_KEY as string, {
       expiresIn: '1h',
     });
   }
@@ -15,7 +15,7 @@ export class Helper {
    * generateRefreshToken
    */
   public generateRefreshToken(payload: object): string {
-    return Jwt.sign(payload, 'SECRET_KEY', {
+    return Jwt.sign(payload, process.env.JWT_SECRET_KEY as string, {
       expiresIn: '7d',
     });
   }
