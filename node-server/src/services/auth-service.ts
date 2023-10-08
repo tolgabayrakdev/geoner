@@ -17,10 +17,10 @@ export class AuthService {
             SELECT * FROM users
             WHERE email = $1 and password = $2
         `;
-    const result = await pool.query(text, [email, hashedPassword]);    
-    if (result.rows.length === 0) {      
-      throw new HttpException(404, "User not found!")
-    }    
+    const result = await pool.query(text, [email, hashedPassword]);
+    if (result.rows.length === 0) {
+      throw new HttpException(404, 'User not found!');
+    }
     const user = result.rows[0];
     const payload = {
       id: user.id,
@@ -39,16 +39,21 @@ export class AuthService {
     const hashedPassword = this.helper.generateHashPassword(password);
     const text = `
             INSERT INTO users(
-                username, email, password, created_at, updated_at
+                username, email, password, role_id, created_at, updated_at
             )
-            VALUES($1, $2, 3$)
+            VALUES($1, $2, $3, $4, now(), now())
         `;
     try {
       await pool.query('BEGIN');
-      const newUser = await pool.query(text, [username, email, hashedPassword]);
+      const newUser = await pool.query(text, [
+        username,
+        email,
+        hashedPassword,
+        1
+      ]);      
       await pool.query('COMMIT');
       return newUser;
-    } catch (error: any) {
+    } catch (error: any) {      
       await pool.query('ROLLBACK');
       throw new Error(error);
     }
