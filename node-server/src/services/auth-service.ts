@@ -1,4 +1,5 @@
 import pool from '../db';
+import HttpException from '../exceptions/http-exception';
 import { Helper } from '../utils/helper';
 
 interface UserSchema {
@@ -16,10 +17,10 @@ export class AuthService {
             SELECT * FROM users
             WHERE email = $1 and password = $2
         `;
-    const result = await pool.query(text, [email, hashedPassword]);
-    if (result.rows.length === 0) {
-      throw new Error('User not found!');
-    }
+    const result = await pool.query(text, [email, hashedPassword]);    
+    if (result.rows.length === 0) {      
+      throw new HttpException(404, "User not found!")
+    }    
     const user = result.rows[0];
     const payload = {
       id: user.id,

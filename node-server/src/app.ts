@@ -6,7 +6,7 @@ import 'dotenv/config';
 import './db';
 //---------------
 import authRouter from './routers/auth-router';
-
+import errorMiddleware from './middleware/error-handler';
 // --------------
 const app: Express = express();
 const port: number = 3000;
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 app.use(morgan('common'));
 app.use(cookieParser());
+app.use(errorMiddleware); // Error handler
 
 // Routers
 app.use('/api/v1/auth', authRouter);
