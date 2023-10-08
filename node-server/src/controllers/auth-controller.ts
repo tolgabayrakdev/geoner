@@ -37,7 +37,7 @@ export class AuthController {
         await this.authService.register(data);
         res.status(201).json({success: true, message: "User created succesful."});
     } catch (error: any) {
-        res.status(500).json("Internal server error.")
+        res.status(500).json({ message: error.message });
     }
   };
 }
