@@ -6,8 +6,6 @@ interface LoginRequest {
   password: string;
 }
 
-
-
 export class AuthController {
   private authService = new AuthService();
   public login = async (
@@ -33,11 +31,23 @@ export class AuthController {
 
   public register = async (req: Request, res: Response) => {
     try {
-        const data = req.body;
-        await this.authService.register(data);
-        res.status(201).json({success: true, message: "User created succesful."});
+      const data = req.body;
+      await this.authService.register(data);
+      res
+        .status(201)
+        .json({ success: true, message: 'User created succesful.' });
     } catch (error: any) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
   };
+
+  public logout = async (req: Request, res: Response): Promise<void> => {
+    try {
+      res.clearCookie("access_token");
+      res.clearCookie("refresh_token");
+      res.status(200).json({success: true, message: "Log out succesful." })
+    } catch (err) {
+      res.status(500).json({success: false, message: "Internal Server Error"})
+    }
+  }
 }

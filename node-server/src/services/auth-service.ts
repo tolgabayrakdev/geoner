@@ -49,11 +49,11 @@ export class AuthService {
         username,
         email,
         hashedPassword,
-        1
-      ]);      
+        1,
+      ]);
       await pool.query('COMMIT');
       return newUser;
-    } catch (error: any) {      
+    } catch (error: any) {
       await pool.query('ROLLBACK');
       throw new Error(error);
     }
