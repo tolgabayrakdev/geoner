@@ -1,6 +1,6 @@
 # Geoner Project Readme.md
 
-## Server
+## Python Server
 #### You can do these to run on your own localhost.
 ! Don't forget the run postgresql on your machine.
 ```
@@ -9,6 +9,14 @@
 - cd app
 - uvicorn main:app --reload(run server)
 ```
+
+## Node Server
+! Don't forget the run postgresql on your machine.
+```
+- npm install
+- npm start(dev with ts-node)
+```
+
 
 ## Client
 ```
