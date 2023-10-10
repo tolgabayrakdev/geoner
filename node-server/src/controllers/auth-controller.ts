@@ -43,11 +43,13 @@ export class AuthController {
 
   public logout = async (req: Request, res: Response): Promise<void> => {
     try {
-      res.clearCookie("access_token");
-      res.clearCookie("refresh_token");
-      res.status(200).json({success: true, message: "Log out succesful." })
+      res.clearCookie('access_token');
+      res.clearCookie('refresh_token');
+      res.status(200).json({ success: true, message: 'Log out succesful.' });
     } catch (err) {
-      res.status(500).json({success: false, message: "Internal Server Error"})
+      res
+        .status(500)
+        .json({ success: false, message: 'Internal Server Error' });
     }
-  }
+  };
 }

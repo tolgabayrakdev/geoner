@@ -11,7 +11,7 @@ export const verifyToken = (
     if (AuthHeader) {
       Jwt.verify(
         AuthHeader,
-        process.env.JWT_SECRET_KEY ?? 'SECRET',
+        process.env.JWT_SECRET_KEY ?? 'secret',
         (error: any, user: any) => {
           if (error) {
             return res.status(403).json({ message: 'Token is not valid!' });
