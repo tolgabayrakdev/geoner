@@ -1,6 +1,6 @@
 import express from 'express';
 import { AuthController } from '../controllers/auth-controller';
-import { verifyValidate } from '../middleware/verify-valite';
+import { verifyValidate } from '../middleware/verify-validate';
 import UserCreateSchema from '../validation/user';
 
 const router = express.Router();
