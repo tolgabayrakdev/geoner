@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && nodemon src/app.ts",
     "build": "tsc",
-    "server": "node dist/app.js"
+    "server": "node dist/src/app.js"
   },
   "keywords": [],
   "author": "",
