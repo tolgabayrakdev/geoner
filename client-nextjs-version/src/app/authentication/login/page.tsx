@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Grid, Box, Card, Stack, Typography, FormGroup, FormControlLabel, Checkbox, Button, TextField, } from "@mui/material";
+import { Grid, Box, Card, Stack, Typography, FormGroup, FormControlLabel, Checkbox, Button, TextField, Snackbar, Alert, } from "@mui/material";
 // components
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
@@ -11,12 +11,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   const handleLoginRequest = async (e: any) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const result = await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
+      const result = await fetch("http://127.0.0.1:1234/api/v1/auth/login", {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -28,6 +33,7 @@ const Login = () => {
         setLoading(false);
       } else {
         setTimeout(() => {
+          setOpen(true);
           setLoading(false);
         }, 1500)
       }
@@ -40,6 +46,11 @@ const Login = () => {
 
   return (
     <PageContainer title="Login" description="this is Login page">
+      <Snackbar open={open} anchorOrigin={{ vertical: "top", horizontal: "right"}} autoHideDuration={1500} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+          Email or password wrong!
+        </Alert>
+      </Snackbar>
       <Box
         sx={{
           position: "relative",
@@ -85,10 +96,10 @@ const Login = () => {
 
                 <Stack>
                   <Box>
-                    <TextField onChange={(e)=> setEmail(e.target.value)} label="Email" fullWidth />
+                    <TextField onChange={(e) => setEmail(e.target.value)} label="Email" fullWidth />
                   </Box>
                   <Box mt="15px">
-                    <TextField onChange={(e)=> setPassword(e.target.value)} type="password" label="Password" fullWidth />
+                    <TextField onChange={(e) => setPassword(e.target.value)} type="password" label="Password" fullWidth />
                   </Box>
                   <Stack
                     justifyContent="space-between"
